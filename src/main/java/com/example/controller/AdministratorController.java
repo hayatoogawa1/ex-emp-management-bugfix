@@ -60,6 +60,11 @@ public class AdministratorController {
 	 * 
 	 * @return 管理者登録画面
 	 */
+
+	 /*
+	  * (1-1)初級 画⾯遷移
+	  * 従業員⼀覧画⾯をログイン画面へ変更しました。
+	  */
 	@GetMapping("/toInsert")
 	public String toInsert() {
 		return "administrator/insert";
@@ -77,7 +82,7 @@ public class AdministratorController {
 		// フォームからドメインにプロパティ値をコピー
 		BeanUtils.copyProperties(form, administrator);
 		administratorService.insert(administrator);
-		return "employee/list";
+		return "administrator/login";
 	}
 
 	/////////////////////////////////////////////////////
@@ -106,7 +111,7 @@ public class AdministratorController {
 			redirectAttributes.addFlashAttribute("errorMessage", "メールアドレスまたはパスワードが不正です。");
 			return "redirect:/";
 		}
-		return "redirect:/employee/showList";
+		return "redirect:/login/showList";
 	}
 
 	/////////////////////////////////////////////////////
