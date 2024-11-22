@@ -3,6 +3,8 @@ package com.example.controller;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,28 +63,49 @@ public class AdministratorController {
 	 * @return 管理者登録画面
 	 */
 
-	 /*
-	  * (1-1)初級 画⾯遷移
-	  * 従業員⼀覧画⾯をログイン画面へ変更しました。
-	  */
+	/*
+	 * (1-1)初級 画⾯遷移
+	 * 従業員⼀覧画⾯をログイン画面へ変更しました。
+	 */
 	@GetMapping("/toInsert")
 	public String toInsert() {
 		return "administrator/insert";
 	}
 
-	/**
-	 * 管理者情報を登録します.
-	 * 
-	 * @param form 管理者情報用フォーム
-	 * @return ログイン画面へリダイレクト
+	/*
+	 * (1-2)初級 入力値エラー処理
+	 * 入力値エラーの機能を追加しました。
 	 */
+
 	@PostMapping("/insert")
-	public String insert(InsertAdministratorForm form) {
+	public String insertAdministrator(
+			@Validated InsertAdministratorForm form,
+			BindingResult bindingResult,
+			RedirectAttributes redirectAttributes) {
+
+	   /*
+		*もしエラーが一つでもあれば入力画面に遷移します。
+		*エラーメッセージを表示します。
+		*/
+		if (bindingResult.hasErrors()) {
+			return "administrator/insert";
+		}
+
+		/**
+		 * 管理者情報を登録します.
+		 * 
+		 * @param form 管理者情報用フォーム
+		 * @return ログイン画面へリダイレクト
+		 */
 		Administrator administrator = new Administrator();
-		// フォームからドメインにプロパティ値をコピー
+		/*
+		 *フォームオブジェクトからドメインオブジェクトにプロパティ値をコピー
+		 */ 
 		BeanUtils.copyProperties(form, administrator);
 		administratorService.insert(administrator);
-		return "administrator/login";
+
+		redirectAttributes.addFlashAttribute("successMessage", "管理者登録を完了しました。");
+		return "redirect:/";
 	}
 
 	/////////////////////////////////////////////////////
@@ -111,7 +134,7 @@ public class AdministratorController {
 			redirectAttributes.addFlashAttribute("errorMessage", "メールアドレスまたはパスワードが不正です。");
 			return "redirect:/";
 		}
-		return "redirect:/employee/showList"; //1-1 初級遷移 loginからemployeeに修正しました。
+		return "redirect:/employee/showList"; // 1-1 初級遷移 loginからemployeeに修正しました。
 	}
 
 	/////////////////////////////////////////////////////
