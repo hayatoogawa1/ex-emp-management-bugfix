@@ -104,6 +104,9 @@ public class AdministratorController {
 		BeanUtils.copyProperties(form, administrator);
 		administratorService.insert(administrator);
 
+		/*
+		 * (1-4)初級　ダブルサブミット対策
+		 */
 		return "administrator/login";
         /*
 		 * (1-2)初級入力値エラー改修
