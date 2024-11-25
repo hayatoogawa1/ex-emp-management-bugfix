@@ -104,8 +104,11 @@ public class AdministratorController {
 		BeanUtils.copyProperties(form, administrator);
 		administratorService.insert(administrator);
 
-		redirectAttributes.addFlashAttribute("successMessage", "管理者登録を完了しました。");
-		return "redirect:/";
+		return "administrator/login";
+        /*
+		 * (1-2)初級入力値エラー改修
+		 * 必要のないflashスコープを削除しました。
+		 */
 	}
 
 	/////////////////////////////////////////////////////

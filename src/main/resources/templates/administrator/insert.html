@@ -86,18 +86,22 @@
                         class="error-messages"
                       >
                         メールアドレスを入力してください
+                        <!-- (1-2)初級 入力値エラー
+                          メールアドレスの不要なvalueを消してth:fieldだけにしました。
+                          -->
                       </label>
                       <input
                         type="text"
                         name="mailAddress"
                         id="mailAddress"
                         class="form-control"
-                        placeholder="yamada@mail.com" 
                         th:errorclass="error-input"
-                        value="yamada@mail.com"
-                      />
+                        placeholder="yamada@mail.com" 
+                        th:field="*{mailAddress}"
+                        />
+                      </div>
                     </div>
-                  </div>
+
                 </div>
                 <!-- パスワード -->
                 <div class="form-group">
@@ -108,6 +112,10 @@
                         th:errors="*{password}"
                         class="error-messages"
                       >
+
+                      <!-- (1-2)初級 入力値エラー
+                          パスワードの不要なvalueを消してth:fieldだけにしました。
+                          -->
                         パスワードを入力してください
                       </label>
                       <input
@@ -115,10 +123,10 @@
                         name="password"
                         id="password"
                         class="form-control"
-                        placeholder="password"
                         th:errorclass="error-input"
-                        value="xxxxxxxx"
-                      />
+                        placeholder="password"
+                        th:field="*{password}"
+                        />
                     </div>
                   </div>
                 </div>
