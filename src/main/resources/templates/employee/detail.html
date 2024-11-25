@@ -132,7 +132,8 @@
                   <tr>
                     <th nowrap>入社日</th>
                     <td>
-                      <span th:utext="${employee.hireDate}">2012/11/29</span>
+                      <!-- (4-1)初級　日付フォーマット　をyyyy年MM月dd日に改修しました。 -->
+                      <span th:text="${#dates.format(employee.hireDate, 'yyyy年MM月dd日')}">2012/11/29</span>
                     </td>
                   </tr>
                   <tr>
