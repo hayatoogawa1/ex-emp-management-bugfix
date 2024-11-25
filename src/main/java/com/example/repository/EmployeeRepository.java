@@ -50,7 +50,12 @@ public class EmployeeRepository {
 	 * @return 全従業員一覧 従業員が存在しない場合はサイズ0件の従業員一覧を返します
 	 */
 	public List<Employee> findAll() {
-		String sql = "SELECT id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count FROM employees";
+		/*
+		 * (3-1)従業員の並び順を入社日順に変更しました。
+		 * 長期勤続年数者順に並び変えました。（昇順）
+		 */
+	
+		String sql = "SELECT id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count FROM employees ORDER BY hire_date";
 
 		List<Employee> developmentList = template.query(sql, EMPLOYEE_ROW_MAPPER);
 
