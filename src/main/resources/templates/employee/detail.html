@@ -69,7 +69,7 @@
               </li>
             </ul>
             <p class="navbar-text navbar-right">
-              <span th:text="${session.administratorName}">山田太郎</span
+              <span th:text="${administratorName}">山田太郎</span
               >さんこんにちは！ &nbsp;&nbsp;&nbsp;
               <a
                 href="../administrator/login.html"
@@ -173,8 +173,8 @@
                     <td>
                       <!-- <span th:utext="${employee.salary + '円'}">400000円</span> -->
                        <!-- (4-2)初級 価格フォーマット カンマを入れるように改修しました。 -->
-                      <!-- <span th:text="${#numbers.formatInteger(employee.salary, 2)}">400,000</span>円
-                    </td> -->
+                      <span th:text="${#numbers.formatInteger(employee.salary,2,'COMMA')}">400,000</span>円
+                    </td>
                   </tr>
                   <tr>
                     <th nowrap>特性</th>

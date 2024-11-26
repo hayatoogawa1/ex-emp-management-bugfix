@@ -83,10 +83,10 @@ public class AdministratorController {
 			BindingResult bindingResult,
 			RedirectAttributes redirectAttributes) {
 
-	   /*
-		*もしエラーが一つでもあれば入力画面に遷移します。
-		*エラーメッセージを表示します。
-		*/
+		/*
+		 * もしエラーが一つでもあれば入力画面に遷移します。
+		 * エラーメッセージを表示します。
+		 */
 		if (bindingResult.hasErrors()) {
 			return "administrator/insert";
 		}
@@ -99,16 +99,18 @@ public class AdministratorController {
 		 */
 		Administrator administrator = new Administrator();
 		/*
-		 *フォームオブジェクトからドメインオブジェクトにプロパティ値をコピー
-		 */ 
+		 * フォームオブジェクトからドメインオブジェクトにプロパティ値をコピー
+		 */
 		BeanUtils.copyProperties(form, administrator);
+
 		administratorService.insert(administrator);
 
 		/*
-		 * (1-4)初級　ダブルサブミット対策
+		 * (1-4)初級 ダブルサブミット（リロード対策）を改修しました。
 		 */
-		return "administrator/login";
-        /*
+
+		return "redirect:/administrator/login";
+		/*
 		 * (1-2)初級入力値エラー改修
 		 * 必要のないflashスコープを削除しました。
 		 */
@@ -122,7 +124,11 @@ public class AdministratorController {
 	 * 
 	 * @return ログイン画面
 	 */
-	@GetMapping("/")
+
+	    /*
+	     * (1-4)初級 ダブルサブミット（リロード対策）を改修しました。
+	     */
+	@GetMapping("administrator/login")
 	public String toLogin() {
 		return "administrator/login";
 	}
@@ -140,12 +146,10 @@ public class AdministratorController {
 
 		if (administrator == null) {
 			redirectAttributes.addFlashAttribute("errorMessage", "メールアドレスまたはパスワードが不正です。");
-			return "redirect:/";
+			return "redirect:/administrator/login";
 		}
-        
-		session.setAttribute("username", administrator.getName());
-		
-		return "redirect:/employee/showList"; // 1-1 初級遷移 loginからemployeeに修正しました。
+
+		return "redirect:/employee/showList"; // (1-1) 初級遷移 loginからemployeeに修正しました。
 
 	}
 
