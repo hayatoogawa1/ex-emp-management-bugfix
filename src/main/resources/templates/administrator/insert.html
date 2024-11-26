@@ -56,13 +56,10 @@
                 <div class="form-group">
                   <div class="row">
                     <div class="col-sm-12">
-                      <label for="name"> 氏名: </label>
-                      <label
-                        th:errors="*{name}"
-                        class="error-messages"
-                      >
-                        氏名を入力してください
+                      <label th:errors="*{name}" class="error-messages" >
                       </label>
+                      <label for="name"> 氏名: </label>
+                      氏名を入力してください
                       <input
                         type="text"
                         name="name"
@@ -71,7 +68,6 @@
                         placeholder="山田太郎"
                         th:field="*{name}"
                         th:errorclass="error-input"
-                        value="山田太郎"
                       />
                     </div>
                   </div>
@@ -80,16 +76,15 @@
                 <div class="form-group">
                   <div class="row">
                     <div class="col-sm-12">
-                      <label for="mailAddress"> メールアドレス: </label>
-                      <label
-                        th:errors="*{mailAddress}"
-                        class="error-messages"
-                      >
-                        メールアドレスを入力してください
-                        <!-- (1-2)初級 入力値エラー
-                          メールアドレスの不要なvalueを消してth:fieldだけにしました。
-                          -->
+                      <label th:errors="*{mailAddress}" class="error-messages">
                       </label>
+                      <label for="mailAddress"> メールアドレス: </label>
+                      
+                      
+                      メールアドレスを入力してください
+                      <!-- (1-2)初級 入力値エラー
+                        メールアドレスの不要なvalueを消してth:fieldだけにしました。
+                        -->
                       <input
                         type="text"
                         name="mailAddress"
@@ -101,23 +96,18 @@
                         />
                       </div>
                     </div>
-
-                </div>
+                   </div>
                 <!-- パスワード -->
                 <div class="form-group">
                   <div class="row">
                     <div class="col-sm-12">
+                      <label th:errors="*{password}" class="error-messages"></label>
                       <label for="password"> パスワード: </label>
-                      <label
-                        th:errors="*{password}"
-                        class="error-messages"
-                      >
 
-                      <!-- (1-2)初級 入力値エラー
-                          パスワードの不要なvalueを消してth:fieldだけにしました。
-                          -->
-                        パスワードを入力してください
-                      </label>
+                                <!-- (1-2)初級 入力値エラー パスワードの不要なvalueを消してth:fieldだけにしました。 -->
+
+                      パスワードを入力してください
+                          
                       <input
                         type="password"
                         name="password"
@@ -126,9 +116,33 @@
                         th:errorclass="error-input"
                         placeholder="password"
                         th:field="*{password}"
-                        />
+                      
+                        >
+                      </div>
                     </div>
-                  </div>
+                </div>
+
+                <!-- (1-5) 中級 確認用パスワードを追加しました。
+                 赤文字でエラー表示できるようにclass="error-messages"とth:errors="*{}"で紐付けしました。-->
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label th:errors="*{password2}" class="error-messages">
+                              </label>
+                              <label for="password2"> 確認用パスワード: </label>
+                              確認用パスワードを入力してください
+                      <input
+                        type="password"
+                        name="password2"
+                        id="password2"
+                        class="form-control"
+                        th:errorclass="error-input"
+                        placeholder="password"
+                        th:field="*{password2}"
+                        />
+
+                      </div>
+                    </div>
                 </div>
                 <!-- 登録ボタン -->
                 <div class="form-group">
