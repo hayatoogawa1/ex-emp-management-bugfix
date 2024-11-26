@@ -149,6 +149,10 @@ public class AdministratorController {
 			return "redirect:/administrator/login";
 		}
 
+
+		/*
+		 *(2-1)中級 ログイン者名表示でログインしたユーザーを表示できるようにしました。
+		 */ 
 		session.setAttribute("administratorName", administrator.getName());
 
 		return "redirect:/employee/showList"; // (1-1) 初級遷移 loginからemployeeに修正しました。
