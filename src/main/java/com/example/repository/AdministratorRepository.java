@@ -59,7 +59,7 @@ public class AdministratorRepository {
 	 */
 
 	/*
-	 * (5-1)SQLインジェクションを解消しました。
+	 * (5-1)SQLインジェクションを改修しました。
 	 */
 	public Administrator findByMailAddressAndPassward(String mailAddress, String password) {
 		String sql = "select id,name,mail_address,password from administrators where mail_address= :mailAddress AND password= :password";
