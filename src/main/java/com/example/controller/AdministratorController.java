@@ -109,29 +109,29 @@ public class AdministratorController {
 		 * (1-4)初級 ダブルサブミット（リロード対策）を改修しました。
 		 */
 
-		 return "redirect:/";
-		 /*
-		  * (1-2)初級入力値エラー改修
-		  * 必要のないflashスコープを削除しました。
-		  */
-	 }
- 
-	 /////////////////////////////////////////////////////
-	 // ユースケース：ログインをする
-	 /////////////////////////////////////////////////////
-	 /**
-	  * ログイン画面を出力します.
-	  * 
-	  * @return ログイン画面
-	  */
- 
-		 /*
-		  * (1-4)初級 ダブルサブミット（リロード対策）を改修しました。
-		  */
-	 @GetMapping("")
-	 public String toLogin() {
-		 return "administrator/login";
-	 }
+		return "redirect:/";
+		/*
+		 * (1-2)初級入力値エラー改修
+		 * 必要のないflashスコープを削除しました。
+		 */
+	}
+
+	/////////////////////////////////////////////////////
+	// ユースケース：ログインをする
+	/////////////////////////////////////////////////////
+	/**
+	 * ログイン画面を出力します.
+	 * 
+	 * @return ログイン画面
+	 */
+
+	/*
+	 * (1-4)初級 ダブルサブミット（リロード対策）を改修しました。
+	 */
+	@GetMapping("")
+	public String toLogin() {
+		return "administrator/login";
+	}
 
 	/**
 	 * ログインします.
@@ -148,6 +148,12 @@ public class AdministratorController {
 			redirectAttributes.addFlashAttribute("errorMessage", "メールアドレスまたはパスワードが不正です。");
 			return "redirect:/administrator/login";
 		}
+
+
+		/*
+		 *(2-1)中級 ログイン者名表示でログインしたユーザーを表示できるようにしました。
+		 */ 
+		session.setAttribute("administratorName", administrator.getName());
 
 		return "redirect:/employee/showList"; // (1-1) 初級遷移 loginからemployeeに修正しました。
 
