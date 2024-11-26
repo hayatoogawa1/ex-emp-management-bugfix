@@ -3,6 +3,7 @@ package com.example.controller;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -92,6 +93,15 @@ public class AdministratorController {
 		}
 
 		/**
+		 * (1-3) 中級 Eメール重複チェックを改修しました。これによって既に登録してあるＥメールアドレスは使えません。
+		 */
+		Administrator mail2 = administratorService.findByMailAddress(form.getMailAddress());
+		if ( mail2 != null) {
+			bindingResult.rejectValue("mailAddress", "error.mailAddress.alreadyExists", "このメールアドレスは既に使用されています。");
+			return "administrator/insert";
+		}
+
+		/**
 		 * 管理者情報を登録します.
 		 * 
 		 * @param form 管理者情報用フォーム
@@ -148,7 +158,6 @@ public class AdministratorController {
 			redirectAttributes.addFlashAttribute("errorMessage", "メールアドレスまたはパスワードが不正です。");
 			return "redirect:/administrator/login";
 		}
-
 
 		/*
 		 *(2-1)中級 ログイン者名表示でログインしたユーザーを表示できるようにしました。
