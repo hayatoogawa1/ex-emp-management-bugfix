@@ -135,12 +135,18 @@ public class AdministratorController {
 	 */
 	@PostMapping("/login")
 	public String login(LoginForm form, RedirectAttributes redirectAttributes) {
+
 		Administrator administrator = administratorService.login(form.getMailAddress(), form.getPassword());
+
 		if (administrator == null) {
 			redirectAttributes.addFlashAttribute("errorMessage", "メールアドレスまたはパスワードが不正です。");
 			return "redirect:/";
 		}
+        
+		session.setAttribute("username", administrator.getName());
+		
 		return "redirect:/employee/showList"; // 1-1 初級遷移 loginからemployeeに修正しました。
+
 	}
 
 	/////////////////////////////////////////////////////
