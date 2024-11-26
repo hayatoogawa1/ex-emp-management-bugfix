@@ -109,29 +109,29 @@ public class AdministratorController {
 		 * (1-4)初級 ダブルサブミット（リロード対策）を改修しました。
 		 */
 
-		return "redirect:/administrator/login";
-		/*
-		 * (1-2)初級入力値エラー改修
-		 * 必要のないflashスコープを削除しました。
-		 */
-	}
-
-	/////////////////////////////////////////////////////
-	// ユースケース：ログインをする
-	/////////////////////////////////////////////////////
-	/**
-	 * ログイン画面を出力します.
-	 * 
-	 * @return ログイン画面
-	 */
-
-	    /*
-	     * (1-4)初級 ダブルサブミット（リロード対策）を改修しました。
-	     */
-	@GetMapping("administrator/login")
-	public String toLogin() {
-		return "administrator/login";
-	}
+		 return "redirect:/administrator/login";
+		 /*
+		  * (1-2)初級入力値エラー改修
+		  * 必要のないflashスコープを削除しました。
+		  */
+	 }
+ 
+	 /////////////////////////////////////////////////////
+	 // ユースケース：ログインをする
+	 /////////////////////////////////////////////////////
+	 /**
+	  * ログイン画面を出力します.
+	  * 
+	  * @return ログイン画面
+	  */
+ 
+		 /*
+		  * (1-4)初級 ダブルサブミット（リロード対策）を改修しました。
+		  */
+	 @GetMapping("administrator/login")
+	 public String toLogin() {
+		 return "administrator/login";
+	 }
 
 	/**
 	 * ログインします.
