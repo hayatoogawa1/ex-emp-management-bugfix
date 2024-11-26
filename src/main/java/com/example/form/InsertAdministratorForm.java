@@ -29,6 +29,10 @@ public class InsertAdministratorForm {
 	@Size(min=8, max=24, message="パスワードは8文字以上24文字以内で記載してください。")
 	private String password;
 
+	@NotBlank(message = "確認用パスワードは必須です")
+	@Size(min=8, max=24, message="パスワードは8文字以上24文字以内で記載してください。")
+    private String password2;
+
 	public String getName() {
 		return name;
 	}
@@ -53,10 +57,20 @@ public class InsertAdministratorForm {
 		this.password = password;
 	}
 
+	public String getPassword2() {
+		return password2;
+	}
+
+	public void setPassword2(String password2) {
+		this.password2 = password2;
+	}
+
 	@Override
 	public String toString() {
 		return "InsertAdministratorForm [name=" + name + ", mailAddress=" + mailAddress + ", password=" + password
-				+ "]";
+				+ ", password2=" + password2 + "]";
 	}
+
+	
 
 }

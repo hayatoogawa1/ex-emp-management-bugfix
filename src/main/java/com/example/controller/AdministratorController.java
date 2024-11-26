@@ -82,7 +82,7 @@ public class AdministratorController {
 	public String insertAdministrator(
 			@Validated InsertAdministratorForm form,
 			BindingResult bindingResult,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes, Model model) {
 
 		/*
 		 * もしエラーが一つでもあれば入力画面に遷移します。
@@ -99,7 +99,20 @@ public class AdministratorController {
 		if ( mail2 != null) {
 			bindingResult.rejectValue("mailAddress", "error.mailAddress.alreadyExists", "このメールアドレスは既に使用されています。");
 			return "administrator/insert";
+
 		}
+
+		/*
+		 * (1-5) 中級 確認用パスワードを追加しました。これによってパスワードが一致しないと登録できないようになりました。
+		 */
+
+		    if (!form.getPassword().equals(form.getPassword2())) {
+            bindingResult.rejectValue("password2", "error.password.mismatch","パスワードが一致しません");
+            return "administrator/insert"; // 不一致の場合はログインページに戻る
+        }
+
+		
+		
 
 		/**
 		 * 管理者情報を登録します.
